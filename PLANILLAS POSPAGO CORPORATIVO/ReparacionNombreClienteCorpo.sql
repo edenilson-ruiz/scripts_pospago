@@ -1,0 +1,46 @@
+--FIX NOMBRE CLIENTE PARA LAS VENTAS DEL CONSOLIDADO
+SELECT *
+/*UPDATE A
+SET A.NOMBRE_CLIENTE = B.NOMBRE_CLIENTE
+	,A.APELLIDO_CLIENTE = B.NOMBRE_CLIENTE
+	,A.NOMBRE_COMPLETO = B.NOMBRE_COMPLETO*/
+FROM PagoPospagoConsolidadoDEXCorpo A
+	INNER JOIN PagoPospagoVentasDEXCorpo B ON B.CO_ID = A.CO_ID AND B.PERIODO_PAGO = A.PERIODO_PAGO
+WHERE A.PERIODO_PAGO = '201810'
+ AND A.NOMBRE_COMPLETO IS NULL
+ AND A.TIPOTRANS_ID = 1
+ 
+--FIX NOMBRE CLIENTE PARA LAS RENOVACIONES DEL CONSOLIDADO
+SELECT *
+UPDATE A
+SET A.NOMBRE_CLIENTE = B.NOMBRE_CLIENTE
+	,A.APELLIDO_CLIENTE = B.NOMBRE_CLIENTE
+	,A.NOMBRE_COMPLETO = B.NOMBRE_COMPLETO
+FROM PagoPospagoConsolidadoDEXCorpo A
+	INNER JOIN PagoPospagoRenovacionesDEXCorpo B ON B.CO_ID = A.CO_ID AND B.PERIODO_PAGO = A.PERIODO_PAGO
+WHERE A.PERIODO_PAGO = '201810'
+ AND A.NOMBRE_COMPLETO IS NULL
+ AND A.TIPOTRANS_ID = 5
+
+
+
+select distinct TIPOTRANS_ID, tipotrans_Desc from PagoPospagoConsolidadoDEXCorpo where PERIODO_PAGO = '201810' and NOMBRE_COMPLETO is null
+
+
+
+select * 
+from PagoPospagoConsolidadoDEXCorpo a
+	inner join PagoPospagoConsolidadoDEXCorpo b on b.CO_ID = a.CO_ID
+where a.PERIODO_PAGO = '201810' 
+	and a.NOMBRE_COMPLETO is null
+	
+select b.nombre_completo, a.* 
+
+update a
+set	 A.NOMBRE_CLIENTE = B.NOMBRE_CLIENTE
+	,A.APELLIDO_CLIENTE = B.NOMBRE_CLIENTE
+	,A.NOMBRE_COMPLETO = B.NOMBRE_COMPLETO
+from PagoPospagoConsolidadoDEXCorpo a
+	inner join PagoPospagoConsolidadoDEXCorpo b on b.co_id = a.co_id and b.fecha_id = a.fecha_id and b.TIPOTRANS_ID = 1
+where a.periodo_pago = '201810'
+ and a.tipotrans_id not in (1,5)
